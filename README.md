@@ -54,6 +54,43 @@ Now, the Stack becomes empty, which means we have visited all the nodes, and our
  <li>If Not Visited, add it to the STACK. Else Call The Function Again Until No more nodes needs to be visited.</li>
 </ol></B>
 
+## Program :
+```
+from collections import deque
+from collections import defaultdict
+
+def bfs(graph,start,visited,path):
+    queue = deque()
+    path.append(start)
+    queue.append(start)
+    visited[start] = True
+    while len(queue) != 0:
+        tmpnode = queue.popleft()
+        for neighbour in graph[tmpnode]:
+            if visited[neighbour] == False:
+                path.append(neighbour)
+                queue.append(neighbour)
+                visited[neighbour] = True
+    return path
+
+graph = defaultdict(list)
+v,e = map(int,input().split())
+for i in range(e):
+    u,v = map(str,input().split())
+    graph[u].append(v)
+    graph[v].append(u)
+
+if '0' in graph:
+    start = '0'
+else:
+    start = 'A'
+path = []
+visited = defaultdict(bool)
+traversedpath = bfs(graph,start,visited,path)
+print(traversedpath)
+
+```
+
 <hr>
 <h3>Sample Input</h3>
 <hr>
@@ -87,6 +124,11 @@ F H <BR>
 <h3>Sample Output</h3>
 <hr>
 ['0', '1', '2', '3', '4']
+
+## Execution :
+
+<img width="1909" height="518" alt="image" src="https://github.com/user-attachments/assets/808bf275-eadd-423b-8169-0ba313bf7816" />
+
 
 <hr>
 <h3>Result:</h3>
